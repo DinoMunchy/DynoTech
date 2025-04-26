@@ -21,11 +21,10 @@ import {
   Slider,
   Checkbox,
   FormGroup,
-  FormControlLabel,
-  useTheme
+  FormControlLabel
 } from '@mui/material';
 import { Link, useSearchParams } from 'react-router-dom';
-import { FilterList, LocalOffer, Memory } from '@mui/icons-material';
+import { FilterList } from '@mui/icons-material';
 
 interface Product {
   id: number;
@@ -41,13 +40,11 @@ interface Product {
 }
 
 const Products: React.FC = () => {
-  const theme = useTheme();
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || '');
   const [sortBy, setSortBy] = useState('featured');
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 2000]);
-  const [showFilters, setShowFilters] = useState(false);
 
   const products: Product[] = [
     {
@@ -63,15 +60,15 @@ const Products: React.FC = () => {
       inStock: true
     },
     {
-      id: 2,
-      name: '4K Smart TV',
-      price: 799.99,
-      image: '/images/products/4k-tv.jpg',
+      id: 5,
+      name: 'Samsung 65" Class S90D Series OLED 4K UHD Smart Tizen TV (2024)',
+      price: 2499.99,
+      image: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6576/6576598_sd.jpg',
       category: 'TVs',
-      description: '65-inch 4K Smart TV with HDR',
-      rating: 4.8,
-      reviews: 256,
-      discount: 10,
+      description: 'Experience stunning picture quality with this 65" OLED 4K UHD TV featuring Quantum HDR OLED+, Motion Xcelerator Turbo Pro 144Hz, built-in Alexa, and Samsung Gaming Hub. Model: QN65S90DAFXZA',
+      rating: 4.9,
+      reviews: 312,
+      discount: 0,
       inStock: true
     },
     {
@@ -104,12 +101,6 @@ const Products: React.FC = () => {
     const value = event.target.value;
     setSearchTerm(value);
     setSearchParams({ search: value, category: selectedCategory });
-  };
-
-  const handleCategoryChange = (event: SelectChangeEvent) => {
-    const value = event.target.value;
-    setSelectedCategory(value);
-    setSearchParams({ search: searchTerm, category: value });
   };
 
   const handleSortChange = (event: SelectChangeEvent) => {
@@ -267,7 +258,9 @@ const Products: React.FC = () => {
                           sx={{
                             position: 'absolute',
                             top: 10,
-                            right: 10
+                            right: 10,
+                            fontWeight: 600,
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                           }}
                         />
                       )}
